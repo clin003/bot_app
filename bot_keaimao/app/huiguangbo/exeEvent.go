@@ -1,16 +1,18 @@
 package main
 
 // import (
-// 	"bot_app/bot_keaimao/core"
-// 	"bot_app/bot_keaimao/onebot"
 // 	"fmt"
 // 	"log"
+// 	"myqq_app/core"
+// 	"myqq_app/onebot"
 // )
 
-// func onEvent(xe onebot.XEvent) {
-// 	// core.OutPutLog(fmt.Sprintf("%s:onEvent:%v", PluginName, xe.RawMessage))
+// func onLogin(xe onebot.XEvent) {
+// 	core.OutPutLog(fmt.Sprintf("%s:onLogin(%d):%s", PluginName, xe.UserID, xe.Message))
 // 	// log.Println("demo", xe.UserID, xe.Message)
 // 	log.Println(xe)
+
+// 	InitHGBConf()
 // }
 
 // func onPrivateMessage(xe onebot.XEvent) {
@@ -20,6 +22,7 @@ package main
 // }
 
 // func onGroupMessage(xe onebot.XEvent) {
+// 	core.OutPutLog(fmt.Sprintf("%s:onGroupMessage(%d,%d):%s", PluginName, xe.GroupID, xe.UserID, xe.Message))
 // 	log.Println(xe)
 // }
 

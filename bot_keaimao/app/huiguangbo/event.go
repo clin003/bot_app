@@ -3,8 +3,14 @@ package main
 import (
 	"bot_app/bot_keaimao/core"
 	"bot_app/bot_keaimao/onebot"
+	_ "embed"
 	"encoding/json"
+
+	"gitee.com/lyhuilin/util"
 )
+
+//go:embed icon.png
+var iconBin []byte
 
 func init() {
 	core.AppInfo = AppInfo
@@ -28,15 +34,15 @@ func init() {
 
 var (
 	//插件名称
-	PluginName = "demo"
+	PluginName = "huiguangbo"
 	//插件版本
-	PluginVer = "0.0.1"
+	PluginVer = "0.0.7"
 	//插件作者
 	PluginAuthor = "白菜林"
 	//插件说明
 	PluginDesc = "慧林淘友软件交流2群:153690156"
 	// 文件名
-	PluginFileName = "demo.cat.dll"
+	PluginFileName = "huiguangbo.cat.dll"
 	// 以上4者可自行修改
 	//插件Skey
 	PluginSkey = "153690156"
@@ -58,9 +64,12 @@ type PluginInfo struct {
 	CoverBase64  string `json:"cover_base64"`
 }
 
+// var iconBase64 string
+
 func AppInfo() string {
 	/*pluginInfo := fmt.Sprintf("插件名称{%s}\n插件版本{%s}\n插件作者{%s}\n插件说明{%s}\n插件skey{%s}\n插件sdk{%s}",
 	PluginName, PluginVer, PluginAuthor, PluginDesc, PluginSkey, PluginSDK)*/
+	iconBase64 := util.Base64StdEncodingEncodeToString(iconBin)
 	pluginInfo := PluginInfo{
 		Name:        PluginName,
 		Author:      PluginAuthor,
@@ -70,7 +79,7 @@ func AppInfo() string {
 		ApiVersion:   "5.0",
 		DeveloperKey: PluginSkey,
 		MenuTitle:    "设置",
-		CoverBase64:  "",
+		CoverBase64:  iconBase64,
 	}
 	bytes, _ := json.Marshal(pluginInfo)
 	return string(bytes)
@@ -79,7 +88,14 @@ func AppInfo() string {
 func AppInit(appConfPath string) int64 {
 	go onebot.ProtectRun(func() {
 		core.OutPutLog("AppInit:" + appConfPath)
+		// core.OutPutLog("iconBase64:" + iconBase64)
 	}, "outPutLog")
+	// go onebot.ProtectRun(func() {
+	// 	once2.Do(func() {
+	// 		Init()
+	// 		InitHGBConf()
+	// 	})
+	// }, "Init()")
 	return 0
 }
 
@@ -101,6 +117,13 @@ func AppEnable() int64 {
 	go onebot.ProtectRun(func() {
 		core.OutPutLog("AppEnable by 白菜林")
 	}, "outPutLog")
+
+	go onebot.ProtectRun(func() {
+		once2.Do(func() {
+			Init()
+			InitHGBConf()
+		})
+	}, "Init()")
 	return 0
 }
 
@@ -108,6 +131,12 @@ func Login(robotId, robotName string, eType int64, msg string) int64 {
 	go onebot.ProtectRun(func() {
 		core.OutPutLog("Login:" + robotName + "(" + robotId + "):" + msg)
 	}, "outPutLog")
+	go onebot.ProtectRun(func() {
+		once2.Do(func() {
+			Init()
+			InitHGBConf()
+		})
+	}, "Init()")
 	return 0
 }
 

@@ -5,7 +5,6 @@ import "C"
 var AppInfo func() string
 var AppInit func(path string) int64
 
-// var AppEvent func(selfID int64, mseeageType int64, subType int64, groupID int64, userID int64, noticeID int64, message string, messageNum int64, messageID int64, rawMessage string, ret int64) int64
 var AppSetting func() int64
 var AppStop func() int64
 var AppEnable func() int64
@@ -219,7 +218,6 @@ func EventGroupMemberDecrease(robotId, fromWxId, fromName, rawMsg *C.char) C.int
 //export EventSysMsg
 func EventSysMsg(robotId *C.char, msgType C.int, rawMsg *C.char) C.int {
 	if OnEventGroupMsg == nil {
-
 		return C.int(0)
 	}
 	return C.int(OnEventSysMsg("EventSysMsg",

@@ -67,7 +67,7 @@ func GetAppDirectory() string {
 	if authCode <= 0 {
 		return ""
 	}
-	r, _, _ = getAppDirectory.Call(
+	r, _, _ := getAppDirectory.Call(
 		uintptr(authCode),
 	)
 	return ptr2str(r)
@@ -76,7 +76,7 @@ func GetFrameVersion() string {
 	if authCode <= 0 {
 		return ""
 	}
-	r, _, _ = getFrameVersion.Call(
+	r, _, _ := getFrameVersion.Call(
 		uintptr(authCode),
 	)
 	return ptr2str(r)
@@ -178,21 +178,22 @@ func ForwardMsg(robotId, toId, msgId string) {
 	)
 	// return ptr2int(r) //int64(ptr2int(r))
 }
+
 func GetRobotName(robotId string) string {
 	if authCode <= 0 {
 		return ""
 	}
-	r, _, _ = getRobotName.Call(
+	r, _, _ := getRobotName.Call(
 		uintptr(authCode), str2ptr(robotId),
 		// str2ptr(toId), str2ptr(msgId),
 	)
 	return ptr2str(r) //int64(ptr2int(r))
 }
-func GetLoggedAccountList(robotId string) string {
+func GetLoggedAccountList() string {
 	if authCode <= 0 {
 		return ""
 	}
-	r, _, _ = getLoggedAccountList.Call(
+	r, _, _ := getLoggedAccountList.Call(
 		uintptr(authCode),
 		// str2ptr(robotId),
 		// str2ptr(toId), str2ptr(msgId),
@@ -203,7 +204,7 @@ func GetFriendList(robotId string, isRefresh bool) string {
 	if authCode <= 0 {
 		return ""
 	}
-	r, _, _ = getFriendList.Call(
+	r, _, _ := getFriendList.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		bool2ptr(isRefresh),
@@ -215,7 +216,7 @@ func GetGroupList(robotId string, isRefresh bool) string {
 	if authCode <= 0 {
 		return ""
 	}
-	r, _, _ = getGroupList.Call(
+	r, _, _ := getGroupList.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		bool2ptr(isRefresh),
@@ -227,7 +228,7 @@ func GetGroupMemberDetailInfo(robotId, groupId, memberId string, isRefresh bool)
 	if authCode <= 0 {
 		return ""
 	}
-	r, _, _ = getGroupMemberDetailInfo.Call(
+	r, _, _ := getGroupMemberDetailInfo.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(groupId),
@@ -241,7 +242,7 @@ func GetGroupMemberList(robotId, groupId string, isRefresh bool) string {
 	if authCode <= 0 {
 		return ""
 	}
-	r, _, _ = getGroupMemberList.Call(
+	r, _, _ := getGroupMemberList.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(groupId),
@@ -253,7 +254,7 @@ func GetContactHeadimgurl(robotId, toId string) string {
 	if authCode <= 0 {
 		return ""
 	}
-	r, _, _ = getContactHeadimgurl.Call(
+	r, _, _ := getContactHeadimgurl.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(toId),
@@ -262,9 +263,9 @@ func GetContactHeadimgurl(robotId, toId string) string {
 }
 func AcceptTransfer(robotId, fromId, msgJson string) int {
 	if authCode <= 0 {
-		return ""
+		return 0
 	}
-	r, _, _ = acceptTransfer.Call(
+	r, _, _ := acceptTransfer.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(fromId),
@@ -274,9 +275,9 @@ func AcceptTransfer(robotId, fromId, msgJson string) int {
 }
 func AgreeGroupInvite(robotId, msgJson string) int {
 	if authCode <= 0 {
-		return ""
+		return 0
 	}
-	r, _, _ = agreeGroupInvite.Call(
+	r, _, _ := agreeGroupInvite.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(msgJson),
@@ -285,9 +286,9 @@ func AgreeGroupInvite(robotId, msgJson string) int {
 }
 func AgreeFriendVerify(robotId, msgJson string) int {
 	if authCode <= 0 {
-		return ""
+		return 0
 	}
-	r, _, _ = agreeFriendVerify.Call(
+	r, _, _ := agreeFriendVerify.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(msgJson),
@@ -296,9 +297,9 @@ func AgreeFriendVerify(robotId, msgJson string) int {
 }
 func RemoveGroupMember(robotId, groupId, memberId string) int {
 	if authCode <= 0 {
-		return ""
+		return 0
 	}
-	r, _, _ = removeGroupMember.Call(
+	r, _, _ := removeGroupMember.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(groupId),
@@ -308,9 +309,9 @@ func RemoveGroupMember(robotId, groupId, memberId string) int {
 }
 func ModifyGroupName(robotId, groupId, groupName string) int {
 	if authCode <= 0 {
-		return ""
+		return 0
 	}
-	r, _, _ = modifyGroupName.Call(
+	r, _, _ := modifyGroupName.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(groupId),
@@ -320,9 +321,9 @@ func ModifyGroupName(robotId, groupId, groupName string) int {
 }
 func ModifyGroupNotice(robotId, groupId, content string) int {
 	if authCode <= 0 {
-		return ""
+		return 0
 	}
-	r, _, _ = modifyGroupNotice.Call(
+	r, _, _ := modifyGroupNotice.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(groupId),
@@ -333,9 +334,9 @@ func ModifyGroupNotice(robotId, groupId, content string) int {
 func BuildingGroupPlus(robotId, memberIds string) int {
 	// memberIds=id1|id2
 	if authCode <= 0 {
-		return ""
+		return 0
 	}
-	r, _, _ = buildingGroupPlus.Call(
+	r, _, _ := buildingGroupPlus.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(memberIds),
@@ -344,9 +345,9 @@ func BuildingGroupPlus(robotId, memberIds string) int {
 }
 func QuitGroup(robotId, groupId string) int {
 	if authCode <= 0 {
-		return ""
+		return 0
 	}
-	r, _, _ = quitGroup.Call(
+	r, _, _ := quitGroup.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(groupId),
@@ -355,9 +356,9 @@ func QuitGroup(robotId, groupId string) int {
 }
 func InviteInGroup(robotId, groupId, friendId string) int {
 	if authCode <= 0 {
-		return ""
+		return 0
 	}
-	r, _, _ = inviteInGroup.Call(
+	r, _, _ := inviteInGroup.Call(
 		uintptr(authCode),
 		str2ptr(robotId),
 		str2ptr(groupId),
