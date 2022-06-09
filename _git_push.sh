@@ -4,6 +4,7 @@
 git add .
 git commit -m "v0.1.* debug"
 git push -u origin main
+git push -u github main
 
 #内测版本
 #git checkout -b myAdmin_limit_v2.12.10
