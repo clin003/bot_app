@@ -17,7 +17,7 @@ var (
 	//插件名称
 	PluginName = "huiguangbo"
 	//插件版本
-	PluginVer = "0.0.13"
+	PluginVer = "0.0.15"
 	//插件作者
 	PluginAuthor = "白菜林"
 	//插件说明

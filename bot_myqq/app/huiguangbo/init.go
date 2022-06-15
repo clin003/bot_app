@@ -73,10 +73,17 @@ func richMsgToSendingMessage(richMsg feedmsg.FeedRichMsgModel) (retMsg string, e
 			m = "[@all]"
 		}
 		if len(richMsgTextContent) > 0 {
-			m = m + " " + richMsgTextContent
+			if len(m) > 0 {
+				m = m + " " + richMsgTextContent
+			} else {
+				m = richMsgTextContent
+			}
+			// m = m + " " + richMsgTextContent
 		}
 
-		if len(richMsg.Image.PicURL) > 0 && strings.HasPrefix(richMsg.Image.PicURL, "http") {
+		if len(richMsg.Image.PicURL) > 0 &&
+			strings.HasPrefix(richMsg.Image.PicURL, "http") &&
+			!strings.Contains(richMsg.Image.PicURL, "gchat.qpic.cn") {
 			picMsg := fmt.Sprintf("[pic=%s]", richMsg.Image.PicURL)
 			m = fmt.Sprintf("%s\r\n%s", m, picMsg)
 		}
