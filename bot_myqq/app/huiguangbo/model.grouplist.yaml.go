@@ -8,11 +8,11 @@ type HGBConf struct {
 	ServerURL   string `yaml:"huiguangbo_server_url"`
 	ServerToken string `yaml:"huiguangbo_server_token"`
 
-	GroupList         []GroupInfo   `yaml: "group_list"`
-	SenderSleep       time.Duration `yaml: "sender_sleep"`
-	GuildList         []GuildInfo   `yaml: "guild_list"`
-	FeedGuildList     []string      `yaml: "feed_guild_list"` //GuildID_ChannelID
-	GuildSenderEnable bool          `yaml: "guild_sender_enable"`
+	GroupList   []GroupInfo   `yaml: "group_list"`
+	SenderSleep time.Duration `yaml: "sender_sleep"`
+	// GuildList         []GuildInfo   `yaml: "guild_list"`
+	// FeedGuildList     []string      `yaml: "feed_guild_list"` //GuildID_ChannelID
+	// GuildSenderEnable bool          `yaml: "guild_sender_enable"`
 
 	// GroupListEx []GroupInfoEx `yaml: "group_list_ex"`
 }
