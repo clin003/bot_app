@@ -1,11 +1,15 @@
 package main
 
+import (
+	"bot_app/ui"
+)
+
 func main() {
 
 }
 
 func onStart() {
 
-	MessageBoxPlain("", "慧林淘友软件交流2群: 153690156")
+	ui.MessageBoxPlain("", "慧林淘友软件交流2群: 153690156")
 	select {}
 }

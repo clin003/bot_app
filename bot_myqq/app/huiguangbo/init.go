@@ -10,7 +10,6 @@ import (
 	"sync"
 	"time"
 
-	// "gitee.com/lyhuilin/open_api/model/feedmsg"
 	"gitee.com/lyhuilin/model/feedmsg"
 	"gitee.com/lyhuilin/util"
 

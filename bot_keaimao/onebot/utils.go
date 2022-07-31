@@ -75,3 +75,21 @@ func ProtectRun(entry func(), label string) {
 	}()
 	entry()
 }
+
+// func ProtectRun(entry func() int, label string) int {
+// 	return func() int {
+// 		res := entry()
+// 		defer func() {
+// 			err := recover()
+// 			if err != nil {
+// 				ERROR("[协程] %v协程发生了不可预知的错误,可向【Gopher X】提交issue：%v",
+// 					label, err)
+// 				buf := make([]byte, 1<<16)
+// 				runtime.Stack(buf, true)
+// 				ERROR("traceback:\n%v", string(buf))
+// 			}
+// 		}()
+// 		return res
+// 	}()
+
+// }

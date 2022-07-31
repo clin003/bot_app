@@ -48,8 +48,8 @@ func GBString(str string) string {
 	return gbstr
 }
 
-func Str2ptr(s string) uintptr {
-	return uintptr(unsafe.Pointer(CString(s)))
+func Str2ptr(str string) uintptr {
+	return uintptr(unsafe.Pointer(CString(str)))
 }
 
 func Int2ptr(i int64) uintptr {
@@ -134,17 +134,17 @@ func File2Bytes(filename string) ([]byte, error) {
 }
 
 func Str2Int(str string) int64 {
-	val, _ := strconv.ParseInt(str, 10, 64)
-	return val
+	i, _ := strconv.ParseInt(str, 10, 64)
+	return i
 }
 
-func Int2Str(val int64) string {
-	str := strconv.FormatInt(val, 10)
+func Int2Str(i int64) string {
+	str := strconv.FormatInt(i, 10)
 	return str
 }
 
-func Float642Str(val float64, prec int) string {
-	str := strconv.FormatFloat(val, 'f', prec, 64)
+func Float642Str(f float64, prec int) string {
+	str := strconv.FormatFloat(f, 'f', prec, 64)
 	return str
 }
 
