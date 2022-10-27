@@ -10,6 +10,6 @@ func main() {
 
 func onStart() {
 
-	ui.MessageBoxPlain("", "慧林淘友软件交流2群: 153690156")
+	ui.MessageBoxPlain("", "交流2群: 1051824036")
 	select {}
 }

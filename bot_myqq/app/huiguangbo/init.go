@@ -86,7 +86,8 @@ func richMsgToSendingMessage(richMsg feedmsg.FeedRichMsgModel) (retMsg string, e
 			picMsg := fmt.Sprintf("[pic=%s]", richMsg.Image.PicURL)
 
 			if len(m) > 0 {
-				m = fmt.Sprintf("%s\r\n%s", m, picMsg)
+				// m = fmt.Sprintf("%s\r\n%s", m, picMsg)
+				m = fmt.Sprintf("%s  %s", m, picMsg)
 			} else {
 				m = picMsg
 			}
