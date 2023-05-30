@@ -12,7 +12,7 @@ func onLogin(xe onebot.XEvent) {
 	// log.Println("demo", xe.UserID, xe.Message)
 	log.Println(xe)
 
-	InitHGBConf()
+	Init_Conf_Save()
 }
 
 func onPrivateMessage(xe onebot.XEvent) {

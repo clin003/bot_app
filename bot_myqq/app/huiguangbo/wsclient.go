@@ -1,7 +1,6 @@
 // Copyright 2015 The HLTYopenAPI(baicai) Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
-//
 package main
 
 import (
@@ -17,18 +16,17 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+var HandleWsSendMsg = func(richMsg feedmsg.FeedRichMsgModel) {}
 var wsUrlStr string
 var serverUrl string
 var wsMap sync.Map
-var wsSendMsg func(richMsg feedmsg.FeedRichMsgModel)
+var wsOnce sync.Once
 
-func initWsServer(wsServerUrl, channel string, sendMsgFun func(richMsg feedmsg.FeedRichMsgModel)) {
-	if sendMsgFun == nil {
-		panic("sendMsgFun is NULL")
+func initWsServer(wsServerUrl, channel string) {
+	if len(wsServerUrl) <= 0 || len(channel) <= 0 {
+		// log.Warnf("openapi_server_url 和 openapi_server_token 需要配置(wsServer初始化失败!)")
+		return
 	}
-	wsSendMsg = sendMsgFun
-	// wsServerUrl := viper.GetString("server_url")
-	// channel := viper.GetString("server_token")
 	if strings.Contains(channel, "|") {
 		cs := strings.Split(channel, "|")
 		for _, v := range cs {
@@ -44,13 +42,16 @@ func initWsServer(wsServerUrl, channel string, sendMsgFun func(richMsg feedmsg.F
 		// log.Infof("激活监听:(%s) %s", wsServerUrl, channel)
 	}
 }
+func initWsServerEx(wsServerUrl, channel string, f func(richMsg feedmsg.FeedRichMsgModel)) {
+	wsOnce.Do(func() {
+		HandleWsSendMsg = f
+		// initWsServer(wsServerUrl, channel)
+	})
+	initWsServer(wsServerUrl, channel)
+}
 
 // 解析服务器地址为ws地址格式
 func parseWsServerUrl(wsServerUrl, channel string) (retText string) {
-	// ws服务器地址
-	// wsServerUrl := "https://api.lyhuilin.com"
-	// ws传输数据channel token
-	// channel := "weipinhui"
 	scheme := "ws"
 	host := "127.0.0.1:8080"
 
@@ -104,11 +105,8 @@ func wsClientStartService(wsUrlStr string) {
 				// log.Errorf(err, "read")
 				return
 			}
-			// go sendMsg(msg)
-			go wsSendMsg(msg)
-			// fmt.Printf("recv(%s):\n%v\n%s\n%v\n", msg.Msgtype, msg.Text.Content, msg.Link, msg.Image)
-			// log.Infof("recv(%s):%v\n", msg.Msgtype, msg.Text.Content)
-			// log.Debugf("recv:%v", msg)
+			go HandleWsSendMsg(msg)
+			// log.Infof("recv: %s", msg.ToString())
 		}
 	}()
 

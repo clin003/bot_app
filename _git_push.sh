@@ -2,7 +2,7 @@
 
 #git checkout -b main
 git add .
-git commit -m "v0.1.* debug"
+git commit -m "增强MyQ广播功能:订阅词、屏蔽词、替换词"
 git push -u origin main
 git push -u github main
 

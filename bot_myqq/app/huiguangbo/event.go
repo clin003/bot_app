@@ -4,6 +4,7 @@ import (
 	"bot_app/bot_myqq/core"
 	"bot_app/bot_myqq/onebot"
 	"encoding/json"
+	"sync"
 )
 
 func init() {
@@ -17,7 +18,7 @@ var (
 	//插件名称
 	PluginName = "huiguangbo"
 	//插件版本
-	PluginVer = "0.0.18"
+	PluginVer = "0.1.6"
 	//插件作者
 	PluginAuthor = "白菜林"
 	//插件说明
@@ -54,6 +55,8 @@ func Info() string {
 	return string(bytes)
 }
 
+var onceEvent sync.Once
+
 // SelfID 机器人QQ, 多Q版用于判定哪个QQ接收到该消息
 // MessageType 消息类型, 接收到消息类型，该类型可在常量表中查询具体定义，此处仅列举： -1 未定义事件 0,在线状态临时会话 1,好友信息 2,群信息 3,讨论组信息 4,群临时会话 5,讨论组临时会话 6,财付通转账 7,好友验证回复会话
 // SubType 消息子类型, 此参数在不同消息类型下，有不同的定义，暂定：接收财付通转账时 1为好友 4为群临时会话 5为讨论组临时会话    有人请求入群时，不良成员这里为1
@@ -86,16 +89,15 @@ func Event(selfID int64, mseeageType int64, subType int64, groupID int64, userID
 	go onebot.ProtectRun(func() { onStart() }, "onStart()")*/
 	case core.MT_P_ENABLE, core.MT_P_LOAD:
 		go onebot.ProtectRun(func() {
-			once2.Do(func() {
+			onceEvent.Do(func() {
 				Init()
-				InitHGBConf()
 			})
+			Init()
 		}, "Init()")
 	case core.MT_QQ_LOGIN, core.MT_QQ_ADD, core.MT_QQ_OFFLINEACT, core.MT_QQ_OFFLINEPAS, core.MT_QQ_DROPLINE:
-		go onebot.ProtectRun(func() { onLogin(xe) }, "onPrivateMessage()")
-		// go onebot.ProtectRun(func() {
-		// 	InitHGBConf()
-		// }, "Init()")
+		go onebot.ProtectRun(func() {
+			onLogin(xe)
+		}, "onPrivateMessage()")
 
 	// 消息事件
 	// 0：临时会话 1：好友会话 4：群临时会话 57：好友验证会话
