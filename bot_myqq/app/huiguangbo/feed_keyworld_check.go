@@ -13,7 +13,7 @@ func feedKeyworldCheck(msgText string) (retText, retFilter string, retBool bool)
 	keyworldFilter := util.KeyworldListParse(getFeedKeyworldFilter())
 	for _, v := range keyworldFilter {
 		vc := v
-		if strings.Contains(msgText, vc) {
+		if strings.Contains(strings.ToLower(msgText), strings.ToLower(vc)) {
 			retFilter = vc
 			retBool = false
 			return
