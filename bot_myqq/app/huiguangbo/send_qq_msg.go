@@ -17,7 +17,9 @@ func richMsgToSendingMessage(richMsg feedmsg.FeedRichMsgModel) (retMsg string, e
 	if richMsg.Msgtype == "rich" {
 		richMsgTextContent := richMsg.Text.Content
 		if k, f, ok := feedKeyworldCheck(richMsgTextContent); !ok {
-			onebot.DEBUG(fmt.Sprintf("订阅关键词检查(屏蔽词:%s),文案:%s", f, richMsgTextContent))
+			errText := fmt.Sprintf("订阅关键词检查(屏蔽词:%s),文案:%s", f, richMsgTextContent)
+			err = fmt.Errorf(errText)
+			onebot.DEBUG(errText)
 			return
 		} else {
 			if len(k) > 0 {
@@ -25,7 +27,9 @@ func richMsgToSendingMessage(richMsg feedmsg.FeedRichMsgModel) (retMsg string, e
 			}
 		}
 		if isDedupEnable() && util.MsgSignatureCheckEx(richMsg.MsgID, richMsgTextContent, 20) {
-			onebot.DEBUG(fmt.Sprintf("去重过滤 (%s)", richMsg.ToString()))
+			errText := fmt.Sprintf("去重过滤 (%s)", richMsg.ToString())
+			err = fmt.Errorf(errText)
+			onebot.DEBUG(errText)
 			return
 		}
 		richMsgTextContent = feedKeyworldReplace(richMsgTextContent)
@@ -85,7 +89,10 @@ func sendRichMsgToGroupListQQ(richMsg feedmsg.FeedRichMsgModel) {
 		groupCode := groupID
 		msg, err := richMsgToSendingMessage(richMsg)
 		if err != nil {
-			onebot.ERROR(fmt.Sprintf("消息处理失败(%d): %s", groupCode, richMsg.ToString()), err)
+			onebot.ERROR(fmt.Sprintf("消息处理异常(%d): %s", groupCode, richMsg.ToString()), err)
+			return
+		}
+		if len(msg) <= 0 {
 			return
 		}
 
