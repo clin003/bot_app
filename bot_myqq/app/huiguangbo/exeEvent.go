@@ -5,6 +5,8 @@ import (
 	"bot_app/bot_myqq/onebot"
 	"fmt"
 	"log"
+
+	"gitee.com/lyhuilin/util"
 )
 
 func onLogin(xe onebot.XEvent) {
@@ -22,7 +24,14 @@ func onPrivateMessage(xe onebot.XEvent) {
 }
 
 func onGroupMessage(xe onebot.XEvent) {
-	core.OutPutLog(fmt.Sprintf("%s:onGroupMessage(%d,%d):%s", PluginName, xe.GroupID, xe.UserID, xe.Message))
+	groupId := xe.GroupID
+	groupMsg := xe.Message
+	if isTo(groupId) && util.MsgSignatureCheckEx("", groupMsg, 50) {
+		core.OutPutLog(fmt.Sprintf("%s:标记已发文案:onGroupMessage(%d,%d):%s", PluginName, groupId, xe.UserID, groupMsg))
+	} else {
+		core.OutPutLog(fmt.Sprintf("%s:onGroupMessage(%d,%d):%s", PluginName, groupId, xe.UserID, groupMsg))
+	}
+
 	log.Println(xe)
 }
 

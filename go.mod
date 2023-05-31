@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	gitee.com/lyhuilin/model v0.0.0-20230209083137-97cda88599b3
-	gitee.com/lyhuilin/util v0.1.21
+	gitee.com/lyhuilin/util v0.1.22
 	github.com/gorilla/websocket v1.5.0
 	github.com/spf13/viper v1.15.0
 	golang.org/x/text v0.9.0

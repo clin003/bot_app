@@ -40,6 +40,8 @@ gitee.com/lyhuilin/model v0.0.0-20230209083137-97cda88599b3 h1:w8AL/HTKmaY83chcP
 gitee.com/lyhuilin/model v0.0.0-20230209083137-97cda88599b3/go.mod h1:6plzcBzKu4yFx9VkRseAZL/K/DBP5vyuOEv7qkB7Z+c=
 gitee.com/lyhuilin/util v0.1.21 h1:86azXoR2wIJl55D60j0JGjS9+1qcOf2AjPSdAkz5Huc=
 gitee.com/lyhuilin/util v0.1.21/go.mod h1:ocxvHNBisDlhB93GxW1+tzwo8Y4oWu+h/kBc14fGV4k=
+gitee.com/lyhuilin/util v0.1.22 h1:EuHzyf0nSE9bcMOq1SfadM8//tPZ/Z2ix+u5R86Av6s=
+gitee.com/lyhuilin/util v0.1.22/go.mod h1:ocxvHNBisDlhB93GxW1+tzwo8Y4oWu+h/kBc14fGV4k=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=

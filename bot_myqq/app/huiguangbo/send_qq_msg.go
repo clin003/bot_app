@@ -26,7 +26,7 @@ func richMsgToSendingMessage(richMsg feedmsg.FeedRichMsgModel) (retMsg string, e
 				onebot.DEBUG(fmt.Sprintf("订阅关键词检查(订阅词:%s): %s", k, richMsgTextContent))
 			}
 		}
-		if isDedupEnable() && util.MsgSignatureCheckEx(richMsg.MsgID, richMsgTextContent, 20) {
+		if isDedupEnable() && util.MsgSignatureCheckEx(richMsg.MsgID, richMsgTextContent, 50) {
 			errText := fmt.Sprintf("去重过滤 (%s)", richMsg.ToString())
 			err = fmt.Errorf(errText)
 			onebot.DEBUG(errText)
