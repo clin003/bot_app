@@ -96,6 +96,10 @@ func sendRichMsgToGroupListQQ(richMsg feedmsg.FeedRichMsgModel) {
 			return
 		}
 
+		if !groupMsgKeyCrosscheck(groupCode, msg) {
+			onebot.DEBUG(fmt.Sprintf("消息忽略(其他机器人已处理)(%d): %s", groupCode, richMsg.ToString()))
+			return
+		}
 		// 广播消息
 		sendResult := core.SendMsgEX(robotID, 0, 2, groupCode, 0, msg, 0) //robot.SendGroupMessage(groupCode, msg)
 		if sendResult != nil {
