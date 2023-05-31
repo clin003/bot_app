@@ -9,7 +9,7 @@ import (
 	"gitee.com/lyhuilin/util"
 )
 
-//true 存在
+//是否已记录 true 真 存在，false 不存在，不存在存储
 func groupMsgKeyCrosscheck(groupId int64, msgText string) bool {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	time.Sleep(time.Millisecond * time.Duration(r.Intn(1000)))
