@@ -96,7 +96,7 @@ func sendRichMsgToGroupListQQ(richMsg feedmsg.FeedRichMsgModel) {
 			return
 		}
 
-		if isDedupEnable() && groupMsgKeyCrosscheck(groupCode, msg) {
+		if isDedupEnable() && groupMsgKeyCrosscheckV2(groupCode, msg, richMsg.MsgID) {
 			onebot.DEBUG(fmt.Sprintf("消息忽略(其他机器人已处理)(%d): %s", groupCode, richMsg.ToString()))
 			return
 		}
