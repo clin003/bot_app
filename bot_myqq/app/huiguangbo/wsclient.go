@@ -109,7 +109,8 @@ func wsClientStartService(wsUrlStr string) {
 			// log.Infof("recv: %s", msg.ToString())
 		}
 	}()
-
+	ticker := time.NewTicker(time.Second * 37)
+	defer ticker.Stop()
 	//os.Interrupt 表示中断
 	//os.Kill 杀死退出进程
 	interrupt := make(chan os.Signal, 1)
@@ -121,7 +122,13 @@ func wsClientStartService(wsUrlStr string) {
 			time.Sleep(30 * time.Second)
 			go wsClientStartService(wsUrlStr)
 			return
-
+		case t := <-ticker.C:
+			err := wsClientConn.WriteMessage(websocket.TextMessage, []byte(t.String()))
+			if err != nil {
+				fmt.Println("write:", err)
+				// log.Errorf(err, "心跳失败")
+				return
+			}
 		case <-interrupt:
 			// fmt.Println("interrupt")
 			// log.Debug("interrupt")
