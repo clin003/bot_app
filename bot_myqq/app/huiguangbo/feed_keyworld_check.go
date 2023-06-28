@@ -45,10 +45,12 @@ func feedKeyworldReplace(content string) string {
 		return ""
 	}
 	retText := content
-	keyworldListMap := util.KeyworldListParseToMap(getFeedKeyworldReplace())
-	for k, v := range keyworldListMap {
-		if len(k) > 0 {
-			retText = strings.ReplaceAll(retText, k, v)
+	keyworldList := util.KeyworldListParseToArrMap(getFeedKeyworldReplace())
+	for _, mapKV := range keyworldList {
+		for k, v := range mapKV {
+			if len(k) > 0 {
+				retText = strings.ReplaceAll(retText, k, v)
+			}
 		}
 	}
 

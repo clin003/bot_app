@@ -4,10 +4,10 @@ go 1.20
 
 require (
 	gitee.com/lyhuilin/model v0.0.0-20230209083137-97cda88599b3
-	gitee.com/lyhuilin/util v0.1.28
+	gitee.com/lyhuilin/util v0.1.29
 	github.com/gorilla/websocket v1.5.0
 	github.com/spf13/viper v1.15.0
-	golang.org/x/text v0.9.0
+	golang.org/x/text v0.10.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
